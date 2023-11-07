@@ -1,10 +1,23 @@
-# cgbside
+# CGbside
 
-## 이홍주 
-- 역할: git 스터디
+CGInside KMPG Project Team A
 
-## 이화정
-- 역할: git 스터디
+# Members & Roles
 
-## 홍수민
-- 역할: git 스터디
+## Mentor
+
+- 이광춘([statkclee](https://github.com/statkclee))
+
+## Mentee
+
+- 이홍주
+  - Git 공부, 설명
+  - Git 관리 
+  
+- 이화정
+  - Git 공부, 설명
+  - Git 관리 
+
+- 홍수민
+  - Git 공부, 설명
+  - Git 관리 
