@@ -1,6 +1,6 @@
 # CGbside
 
-CGInside KMPG Project Team A
+CGInside KMPG Project Team B
 
 # Members & Roles
 
