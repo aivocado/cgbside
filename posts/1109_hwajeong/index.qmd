@@ -1,0 +1,10 @@
+---
+title: "1109_Hwajeong"
+author: "HwaJeong Lee"
+date: "2023-11-09"
+categories: [analysis]
+image: "image.jpg"
+---
+
+## 이화정 블로그 테스트중입니다. 
+- 세부 사항은 추후 추가해서 올리겠습니다. 
