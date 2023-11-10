@@ -18,7 +18,7 @@
     "href": "index.html",
     "title": "cgbside",
     "section": "",
-    "text": "프로젝트를 시작합니다!!!\n\n\n\n\n\n\n\n\n  \n\n\n\n\nMarkDown 문법정리\n\n\n\n\n\n\n\ncode\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2023\n\n\nLee hong ju\n\n\n\n\n\n\n  \n\n\n\n\n1109_HongJu\n\n\n\n\n\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2023\n\n\nHongJu Lee\n\n\n\n\n\n\n  \n\n\n\n\n1109_Sumin\n\n\n\n\n\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 9, 2023\n\n\nSumin Hong\n\n\n\n\n\n\n  \n\n\n\n\n1109_Hwajeong\n\n\n\n\n\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 9, 2023\n\n\nHwaJeong Lee\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 7, 2023\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 4, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "프로젝트를 시작합니다!!!\n\n\n\n\n\n\n\n\n  \n\n\n\n\nMarkDown 문법정리\n\n\n\n\n\n\n\ncode\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2023\n\n\nLee hong ju\n\n\n\n\n\n\n  \n\n\n\n\n1109_Sumin\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2023\n\n\nSumin Hong\n\n\n\n\n\n\n  \n\n\n\n\n1109_HongJu\n\n\n\n\n\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2023\n\n\nHongJu Lee\n\n\n\n\n\n\n  \n\n\n\n\n1109_Hwajeong\n\n\n\n\n\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 9, 2023\n\n\nHwaJeong Lee\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 7, 2023\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 4, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -32,7 +32,7 @@
     "href": "posts/1109_sumin/index.html",
     "title": "1109_Sumin",
     "section": "",
-    "text": "세부 사항은 추후 추가해서 올리겠습니다."
+    "text": "Open AI DevDay Keynote\n\n시행 일시: 2023.11.07\nOpen AI가 실시한 첫 개발자 컨퍼런스  \n\n\nOpenAI가 새롭게 발표한 기능 정리\n\nGPT Builder: 대화형 챗봇 개발 환경 \n\n챗봇 사용 목적 등을 설명해주고, 추가 자료(pdf, img 등) 입력하면 맞춤형 챗봇 개발 가능\nGPT Store 이용해 GPT Builder로 개발된 챗봇 공유 및 사용 가능\n\nGPT Store 사이트 링크: https://gptbuilderstore.com/ (11월 말 런칭 예정) \n\n\nAPI 개선\n\nAssistants API\n\nBlackbox 해소 위해 Code interpreter, 답 제공 시 사용된 주요 parameter 제공\n\nJSON 모드 추가\n\nJSON 타입으로 답변\n\nSEED 값 세팅 가능\nLog Probability 제공 \n\nGPT-4 Turbo 출시\n\nContext Length 증가\n\n32K → 128K\n\nMore user control\n\n답변의 형식 지정 가능\n여러 함수 한 번에 처리 가능\n외부 문서, 정보 학습시켜서 사용 가능\n\nNew modalities\n\nVision, Speech 가능\n\nData Update\n\n2023년 4월 정보까지 학습됨  \n\n\n\n\n\n느낀점..\n컨퍼런스 영상을 시청하며, 아래의 두 장면이 가장 기억에 남았다.  \n이제 인공지능이 음성명령만으로 중요한 정보를 담아 포스터를 만들어주고, 인공지능을 간편하게 커스텀하여 여행 가이드로 사용할 수 있는 시대가 되었다.\n이 장면들을 보며, 전 세계 사람들이 각자만의 아이디어로 커스텀한 인공지능을 공유한다면, 어떤 획기적인 인공지능 서비스가 탄생할지 11월 말이 기대가 되었다.\n그러나, 데이터 사이언티스트를 꿈꾸며 인공지능을 공부하는 학생으로서, 다소 우려가 되기도 하였다. 기존에는 인공지능을 활용해 서비스를 런칭할 때, 데이터를 수집하고, 정제하여, 코드로 fine-tuning하는 작업을 거쳐야했다. 그러나 이제는 코드 없이 음성명령만으로 간편하게 모델을 커스텀하는 것이 가능해졌다. 다시 말해, 인공지능 개발자나 데이터 사이언티스트가 아닌 일반인들도 단순히 인공지능 서비스를 소비하는 것을 넘어 인공지능을 활용할 수 있게 되었다. 이러한 상황에서 데이터 사이언티스트의 역할과 데이터 사이언티스트가 지녀야 할 소양이 무엇일지에 대한 고민을 해보게 되었다.\n추가적으로, 음성명령만으로 인공지능에게 입금을 하도록 하는 시연을 보며, 인공지능이 검색 엔진, 금융 시스템, 사내 데이터베이스 등과 결합된다면 훨씬 더 편리하고 효율적인 일상이 되겠다는 상상을 할 수 있었다. 다만, 이를 위해서는 개인정보 보호 문제, 저작권 문제 등이 먼저 해결되어야 하는 만큼, 기술적으로는 개인정보를 보호할 수 있는 방법에 대한 연구, 윤리적으로는 개인정보 및 저작물 활용에 대한 논의가 우선적으로 필요할 것으로 보인다."
   },
   {
     "objectID": "posts/1109_sumin/index.html#홍수민-블로그-테스트중입니다.",
