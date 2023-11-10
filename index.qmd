@@ -1,5 +1,5 @@
 ---
-title: "cgbside"
+title: "CGBINSIDE"
 listing:
   contents: posts
   sort: "date desc"
