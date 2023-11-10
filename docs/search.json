@@ -11,12 +11,12 @@
     "href": "about.html",
     "title": "KPMG 캡스톤",
     "section": "",
-    "text": "이홍주, 이화정, 홍수민 으로 구성된 팀입니다."
+    "text": "이홍주, 이화정, 홍수민 으로 구성된 팀입니다.\n\n\n\n\n이홍주\n\n\n데이터 사이언티스트\n\n\n\n\n\n이화정\n\n\n데이터 사이언티스트\n\n\n\n\n\n홍수민\n\n\n데이터 사이언티스트"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "cgbside",
+    "title": "CGBINSIDE",
     "section": "",
     "text": "프로젝트를 시작합니다!!!\n\n\n\n\n\n\n\n\n  \n\n\n\n\nMarkDown 문법정리\n\n\n\n\n\n\n\ncode\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2023\n\n\nLee hong ju\n\n\n\n\n\n\n  \n\n\n\n\n1109_Sumin\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2023\n\n\nSumin Hong\n\n\n\n\n\n\n  \n\n\n\n\n1109_HongJu\n\n\n\n\n\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2023\n\n\nHongJu Lee\n\n\n\n\n\n\n  \n\n\n\n\n1109_Hwajeong\n\n\n\n\n\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 9, 2023\n\n\nHwaJeong Lee\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 7, 2023\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 4, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
@@ -89,5 +89,19 @@
     "title": "MarkDown 문법정리",
     "section": "",
     "text": "이건 인용하는데 사용하는 코드입니다.\n\n\n\n\ngit 공부\n프로젝트 수정\n\n\n\n\n\n작대기\n\n점\n\n더하기\n\n\n\n\n\n\npython 코드\ndef greet(name):\n    print(f\"Hello, {name}!\")\ndef hello():\n    print(\"hello world\")\n코드 종료\n\n\n\n\n구글 링크 추가 구글 링크\n\n\n\n\n\n\n\nAlt text"
+  },
+  {
+    "objectID": "about.html#이홍주",
+    "href": "about.html#이홍주",
+    "title": "KPMG 캡스톤",
+    "section": "이홍주",
+    "text": "이홍주"
+  },
+  {
+    "objectID": "ihongju.html",
+    "href": "ihongju.html",
+    "title": "CGINSIDE_TEAM B",
+    "section": "",
+    "text": "여기에 이홍주의 추가 정보 및 프로필 내용을 작성하세요."
   }
 ]
