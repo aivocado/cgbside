@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Lee hong ju">
+<meta name="dcterms.date" content="2023-11-10">
 
-
-<title>CGINSIDE_TEAM B - KPMG 캡스톤</title>
-
+<title>CGINSIDE_TEAM B - MarkDown 문법정리</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,24 +22,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -62,7 +97,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -72,9 +107,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title"><img src="images/BTEAM_logo.png" alt="CGINSIDE_TEAM B" style="width: 100px; height: auto;"></span>
-
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">CGINSIDE_TEAM B</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -84,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">홈</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -93,12 +127,12 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
         <li>
-    <a class="dropdown-item" href="./overview.html" rel="" target="">
+    <a class="dropdown-item" href="../../overview.html" rel="" target="">
  <span class="dropdown-text">개발개요</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./data.html" rel="" target="">
+    <a class="dropdown-item" href="../../data.html" rel="" target="">
  <span class="dropdown-text">데이터</span></a>
   </li>  
     </ul>
@@ -106,7 +140,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">KPMG 캡스톤</span></a>
   </li>  
   <li class="nav-item compact">
@@ -127,90 +161,100 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">MarkDown 문법정리</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">code</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lee hong ju </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 10, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<div class="quarto-about-jolla">
-  <img src="profile.jpg" class="about-image
-  round " style="height: 15em; width: 15em;">
- <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">KPMG 캡스톤</h1>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header><main class="content" id="quarto-document-content">
-<style>
-  .profiles {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-  }
-  .profile-card {
-    text-align: center;
-    width: 200px; /* 적당한 카드 너비 조정 */
-    border: 1px solid #ddd; /* 테두리 스타일 추가 */
-    border-radius: 8px; /* 둥근 모서리 */
-    padding: 15px;
-  }
-  .profile-card img {
-    max-width: 100%;
-    border-radius: 50%; /* 이미지를 동그랗게 만듭니다. */
-  }
-</style>
-<p>이홍주, 이화정, 홍수민 으로 구성된 팀입니다.</p>
-<div class="profiles">
-<div class="profile-card">
-<img src="images/hongju.gif" alt="이홍주 프로필">
-<h3>
-이홍주
-</h3>
-<p>
-데이터 사이언티스트
-</p>
-</div>
-<div class="profile-card">
-<img src="images/hwajeong.jpeg" alt="이화정 프로필">
-<h3>
-이화정
-</h3>
-<p>
-데이터 사이언티스트
-</p>
-</div>
-<div class="profile-card">
-<img src="images/sumin.jpeg" alt="홍수민 프로필">
-<h3>
-홍수민
-</h3>
-<p>
-데이터 사이언티스트
-</p>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="마크다운-문법-정리입니다." class="level2">
+<h2 class="anchored" data-anchor-id="마크다운-문법-정리입니다."># 마크다운 문법 정리입니다.</h2>
+<blockquote class="blockquote">
+<p>이건 인용하는데 사용하는 코드입니다.</p>
+</blockquote>
+<section id="오늘의-할일" class="level3">
+<h3 class="anchored" data-anchor-id="오늘의-할일">오늘의 할일</h3>
+<ol type="1">
+<li>git 공부</li>
+<li>프로젝트 수정</li>
+</ol>
+</section>
+<section id="점-종류" class="level3">
+<h3 class="anchored" data-anchor-id="점-종류">점 종류</h3>
+<ul>
+<li>작대기
+<ul>
+<li>점
+<ul>
+<li>더하기</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="코드-작성" class="level3">
+<h3 class="anchored" data-anchor-id="코드-작성">코드 작성</h3>
+<p>python 코드</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greet(name):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hello():</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"hello world"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>코드 종료</p>
+</section>
+<section id="참조-링크" class="level3">
+<h3 class="anchored" data-anchor-id="참조-링크">참조 링크</h3>
+<ul>
+<li>구글 링크 추가 <a href="https://google.com," title="구글">구글 링크</a></li>
+</ul>
+</section>
+<section id="이미지-추가" class="level3">
+<h3 class="anchored" data-anchor-id="이미지-추가">이미지 추가</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Markdown.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Alt text</figcaption>
+</figure>
 </div>
 
 
-</main> 
-  <hr class="about-sep">
-   <div class="about-links">
-  <a href="https://twitter.com" class="about-link" rel="" target="">
-    <i class="bi bi-twitter"></i>
-     <span class="about-link-text">Twitter</span>
-  </a>
-  <a href="https://linkedin.com" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-  <a href="https://github.com/aivocado/cgbside" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-</div>
-</div>
- <!-- /main -->
+</section>
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -231,6 +275,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

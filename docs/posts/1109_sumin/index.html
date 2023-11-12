@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sumin Hong">
-<meta name="dcterms.date" content="2023-11-09">
+<meta name="dcterms.date" content="2023-11-10">
 
 <title>CGINSIDE_TEAM B - 1109_Sumin</title>
 <style>
@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="quarto-title column-body">
       <h1 class="title">1109_Sumin</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">analysis</div>
+                <div class="quarto-category">news</div>
               </div>
                   </div>
   </div>
@@ -150,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 9, 2023</p>
+        <p class="date">November 10, 2023</p>
       </div>
     </div>
     
@@ -168,13 +168,69 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="홍수민-블로그-테스트중입니다." class="level2">
-<h2 class="anchored" data-anchor-id="홍수민-블로그-테스트중입니다.">홍수민 블로그 테스트중입니다.</h2>
+<section id="open-ai-devday-keynote" class="level1">
+<h1>Open AI DevDay Keynote</h1>
 <ul>
-<li>세부 사항은 추후 추가해서 올리겠습니다.</li>
+<li>시행 일시: 2023.11.07<br></li>
+<li>Open AI가 실시한 첫 개발자 컨퍼런스 <br> <br></li>
 </ul>
+<section id="openai가-새롭게-발표한-기능-정리" class="level3">
+<h3 class="anchored" data-anchor-id="openai가-새롭게-발표한-기능-정리">OpenAI가 새롭게 발표한 기능 정리</h3>
+<ol type="1">
+<li>GPT Builder: 대화형 챗봇 개발 환경<br> <img src="GPT_builder.png" class="img-fluid" alt="GPT Builder"><br>
+<ul>
+<li>챗봇 사용 목적 등을 설명해주고, 추가 자료(pdf, img 등) 입력하면 맞춤형 챗봇 개발 가능<br></li>
+<li>GPT Store 이용해 GPT Builder로 개발된 챗봇 공유 및 사용 가능<br>
+<ul>
+<li>GPT Store 사이트 링크: https://gptbuilderstore.com/ (11월 말 런칭 예정)<br> <br></li>
+</ul></li>
+</ul></li>
+<li>API 개선
+<ol type="i">
+<li>Assistants API
+<ul>
+<li>Blackbox 해소 위해 Code interpreter, 답 제공 시 사용된 주요 parameter 제공</li>
+</ul></li>
+<li>JSON 모드 추가
+<ul>
+<li>JSON 타입으로 답변</li>
+</ul></li>
+<li>SEED 값 세팅 가능</li>
+<li>Log Probability 제공<br> <br></li>
+</ol></li>
+<li>GPT-4 Turbo 출시
+<ol type="i">
+<li>Context Length 증가
+<ul>
+<li>32K → 128K</li>
+</ul></li>
+<li>More user control
+<ul>
+<li>답변의 형식 지정 가능</li>
+<li>여러 함수 한 번에 처리 가능</li>
+<li>외부 문서, 정보 학습시켜서 사용 가능</li>
+</ul></li>
+<li>New modalities
+<ul>
+<li>Vision, Speech 가능</li>
+</ul></li>
+<li>Data Update
+<ul>
+<li>2023년 4월 정보까지 학습됨 <br> <br></li>
+</ul></li>
+</ol></li>
+</ol>
+</section>
+<section id="느낀점.." class="level3">
+<h3 class="anchored" data-anchor-id="느낀점..">느낀점..</h3>
+<p>컨퍼런스 영상을 시청하며, 아래의 두 장면이 가장 기억에 남았다.<br> <img src="canva.png" class="img-fluid" alt="Canva-GPT"><br> <img src="travel.png" class="img-fluid" alt="travel.png"><br></p>
+<p>이제 인공지능이 음성명령만으로 중요한 정보를 담아 포스터를 만들어주고, 인공지능을 간편하게 커스텀하여 여행 가이드로 사용할 수 있는 시대가 되었다.<br></p>
+<p>이 장면들을 보며, 전 세계 사람들이 각자만의 아이디어로 커스텀한 인공지능을 공유한다면, 어떤 획기적인 인공지능 서비스가 탄생할지 11월 말이 기대가 되었다.</p>
+<p>그러나, 데이터 사이언티스트를 꿈꾸며 인공지능을 공부하는 학생으로서, 다소 우려가 되기도 하였다. 기존에는 인공지능을 활용해 서비스를 런칭할 때, 데이터를 수집하고, 정제하여, 코드로 fine-tuning하는 작업을 거쳐야했다. 그러나 이제는 코드 없이 음성명령만으로 간편하게 모델을 커스텀하는 것이 가능해졌다. 다시 말해, 인공지능 개발자나 데이터 사이언티스트가 아닌 일반인들도 단순히 인공지능 서비스를 소비하는 것을 넘어 인공지능을 활용할 수 있게 되었다. 이러한 상황에서 데이터 사이언티스트의 역할과 데이터 사이언티스트가 지녀야 할 소양이 무엇일지에 대한 고민을 해보게 되었다.</p>
+<p>추가적으로, 음성명령만으로 인공지능에게 입금을 하도록 하는 시연을 보며, 인공지능이 검색 엔진, 금융 시스템, 사내 데이터베이스 등과 결합된다면 훨씬 더 편리하고 효율적인 일상이 되겠다는 상상을 할 수 있었다. 다만, 이를 위해서는 개인정보 보호 문제, 저작권 문제 등이 먼저 해결되어야 하는 만큼, 기술적으로는 개인정보를 보호할 수 있는 방법에 대한 연구, 윤리적으로는 개인정보 및 저작물 활용에 대한 논의가 우선적으로 필요할 것으로 보인다.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

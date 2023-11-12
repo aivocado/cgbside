@@ -3,7 +3,8 @@ project:
   output-dir: "docs"
 
 website:
-  title: "CGINSIDE_TEAM B"
+  title: "<img src='images/BTEAM_logo.png' alt='CGINSIDE_TEAM B' style='width: 100px; height: auto;'>"
+
   navbar:
     left:
       - href: index.qmd

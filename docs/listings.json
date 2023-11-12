@@ -2,9 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/how_to_use_markdown/index.html",
       "/posts/1109_sumin/index.html",
-      "/posts/1109_hwajeong/index.html",
       "/posts/1109_hongju/index.html",
+      "/posts/1109_hwajeong/index.html",
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html"
     ]
