@@ -168,13 +168,92 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="이화정-블로그-테스트중입니다." class="level2">
-<h2 class="anchored" data-anchor-id="이화정-블로그-테스트중입니다.">이화정 블로그 테스트중입니다.</h2>
+<section id="openai-devday-opening-keynote-리뷰" class="level2">
+<h2 class="anchored" data-anchor-id="openai-devday-opening-keynote-리뷰"><strong>OpenAI DevDay, Opening Keynote 리뷰</strong></h2>
+<section id="년간의-성과" class="level3">
+<h3 class="anchored" data-anchor-id="년간의-성과"><strong><u>#1년간의 성과</u></strong></h3>
 <ul>
-<li>세부 사항은 추후 추가해서 올리겠습니다.</li>
+<li>지난 1년간, OpenAI는 ChatGPT, GPT-4, DALL•E 3(이미지 모델) 등의 모델을 출시하였고, 약 2백만 개발자와 92% 이상의 포춘 500 대기업이 OpenAI 제품을 사용하고 있다고 한다.<br>
+</li>
+<li>ChatGPT는 주간 활성 사용자가 무려 약 1억 명에 이른다고 한다. 이를 통해 OpenAI는 현재 세계에서 가장 선진적이고 널리 사용되는 AI 플랫폼임을 입증한 것 같다.</li>
+</ul>
+</section>
+<section id="gpt-4-turbo-소개" class="level3">
+<h3 class="anchored" data-anchor-id="gpt-4-turbo-소개"><strong><u>#GPT-4 Turbo 소개</u></strong></h3>
+<p>Keynote의 하이라이트는 다양한 사용자 요구를 처리하는 혁신적인 모델인 GPT-4 Turbo의 소개였다. 여섯 가지 주요 개선 사항을 반영하였는데 내용은 다음과 같다.</p>
+<ol type="1">
+<li><strong>Context length</strong> : 기존 8k context에서 16배 긴 128k context 지원. (128,000 토큰, 표준 서적의 300페이지에 달함)</li>
+<li><strong>More control</strong> : Json Load 기능, Logprobs 기능, 재현 가능한 출력이라는 새로운 기능을 도입(시드 매개변수를 전달하면 모델이 일관된 출력을 반환한다.)</li>
+<li><strong>Better knowledge</strong> <strong>:</strong> 검색 기능을 도입하여 외부 지식 통합가능, 지식 cutoff도 2023.4월로 업데이트 됨.</li>
+<li><strong>New modalities :</strong> DALL•E 3, GPT-4 Turbo, 그리고 새로운 TTS 모델이 모두 API에 도입됨. *오픈 소스 음성 인식 모델인 Whisper V3의 다음 버전 출시 예정이며 이 또한 곧 API에 도입될 예정.</li>
+<li><strong>Costomization</strong> : GPT-3.5 16k fine-tuning 가능, GPT-4 fine-tuning 일부 사용자에게 access 허용, custom model 출시(기업 고객용)</li>
+<li><strong>Higher rate limit</strong> : 토큰당 분당 속도를 두 배로 늘릴 예정. API 계정 설정에서 추가적인 속도 제한과 할당량을 변경할 수 있게 됨.</li>
+</ol>
+</section>
+<section id="copyright-sheild" class="level3">
+<h3 class="anchored" data-anchor-id="copyright-sheild"><strong><u>#Copyright Sheild</u></strong></h3>
+<ul>
+<li>Openai devday에서, 발표자들이 ’저작권’과 ’보안’에 대한 언급을 자주 하는 것을 볼 수 있다.<br>
+</li>
+<li>기업 고객들을 더 끌어들이기 위해서는 걸림돌인 ‘저작권 및 보안’ 문제를 언급하지 않을 수 없는데 이 문제에서 벗어나기 위한 노력의 일환으로 <strong>‘Copyright Shield’</strong> 서비스 또한 새롭게 선보였다.<br>
+</li>
+<li>저작권 침해에 대한 법적 주장이 제기될 경우, OpenAI가 고객을 대신하여 법적 대응을 지원하고 관련 비용을 부담한다는 내용이었다. ChatGPT Enterprise와 API 모두에 적용이 될 예정이다.<br>
+</li>
+<li>다시한번, OpenAI는 API나 ChatGPT Enterprise에서의 데이터로 훈련하지 않는다는 점을 강조하였다.</li>
+</ul>
+<p>+추가적으로 가장 중요한 2가지 개선사항을 발표하였다.</p>
+</section>
+<section id="가격인하-속도-개선" class="level3">
+<h3 class="anchored" data-anchor-id="가격인하-속도-개선"><strong><u>#가격인하 &amp; 속도 개선</u></strong></h3>
+<ul>
+<li>GPT-4 Turbo : 천 개의 프롬프트 토큰당 1센트, 천 개의 완료 토큰당 0.03달러 (프롬프트 토큰에 대해 3배, 완료 토큰에 대해 2배의 비율로 GPT-4보다 저렴, 3.75% 이상 더 저렴)</li>
+<li>GPT-3.5 Turbo 16k : input 토큰은 3배, ouput 토큰은 2배 더 저렴</li>
+<li>GPT-4 Turbo 속도 개선 예정</li>
+</ul>
+<p>여기까지, 모델 자체에 대한 개선사항이었다.</p>
+</section>
+<section id="microsoft와의-협력" class="level3">
+<h3 class="anchored" data-anchor-id="microsoft와의-협력"><strong><u>#Microsoft와의 협력</u></strong></h3>
+<p>다음으로는 Microsoft의 CEO인 Satya Nadella가 특별 게스트로 나왔는데, OpenAI와의 파트너십에 대해 강조하였다.</p>
+<ul>
+<li>Azure를 기반으로 최고의 시스템을 구축하고 개발자들에게 제공하여 최고의 모델을 만들 수 있도록 지원하겠다고 밝혔다. 또한, 개발자로서 자체 제품을 개발 중이며, OpenAI의 API를 활용하여 GitHub Copilot과 같은 제품을 만들 계획이라고 한다. (현재 Copilot 기능에 gpt api를 도입하는 것 같다.) Azure 마켓플레이스를 통해 제품을 신속히 출시하고 시장에 내놓을 예정이며 마지막으로, Microsoft와 OpenAI의 공통 목표는 <strong>인공지능의 이점을 모든 사람에게 전달하는 것</strong>이라며 마무리를 하였다.</li>
+</ul>
+<p>+또 다른 ‘작은’ 개선사항 하나 더!</p>
+<p>모델 picker가 사라졌다! (드롭다운 박스 없어짐)<br> <strong>ChatGPT가 알아서, 언제 어떤 것을 사용해야 하는지 자동으로 처리해 준다고 한다.</strong></p>
+</section>
+<section id="gpts-도입-맞춤형-chatgpt" class="level3">
+<h3 class="anchored" data-anchor-id="gpts-도입-맞춤형-chatgpt"><strong><u>#GPTs 도입 : 맞춤형 ChatGPT</u></strong></h3>
+<ul>
+<li>OpenAI는 AI의 안전성 문제를 해결하는 가장 효과적인 방법은 <strong>점진적이고 반복적인 배포</strong>라고 강조하고 있다. 이에 그 첫 단계로 GPTs라는 새로운 기술을 소개했다.</li>
+<li>GPTs는 특정 목적을 위해 구성된 ChatGPT의 맞춤형 버전이다.</li>
+<li>여기서도 ’보안’에 대한 언급을 한다. 모든 작업을 수행하기 전 ’allow’를 통해 사용자의 허가를 받게 끔 설정되어 있다.</li>
+<li>코딩 없이, 자연어로만으로 GPT를 만드는 데모를 보여준다.</li>
+</ul>
+</section>
+<section id="월-말-gpt-store-공개-예정" class="level3">
+<h3 class="anchored" data-anchor-id="월-말-gpt-store-공개-예정"><strong><u>#11월 말, GPT Store 공개 예정</u></strong></h3>
+<p>위에서 소개한 다양한 맞춤형 GPTs들을 생성하고 공유할 수 있는 마켓플레이스인 GPT Store가 출시예정이다.</p>
+<p>+사용자 수에 따른 수익 창출도 가능하다고 하니, 다양한 사람들의 다양한 GPT들이 공유될 수 있는 장을 마련한 것 같다. 어떤 GPT들이 나올지 기대가 된다.</p>
+</section>
+<section id="assistant-api에서의-새로운-모달리티와-개선-사항개발자들을-위한" class="level3">
+<h3 class="anchored" data-anchor-id="assistant-api에서의-새로운-모달리티와-개선-사항개발자들을-위한"><strong><u>#Assistant API에서의 새로운 모달리티와 개선 사항(개발자들을 위한</u>)</strong></h3>
+<p>개인적으로는 GPT API를 통해서 개발 경험이 없어서 와닿지는 않았던 부분이지만, 개발자들이 API를 활용하여 더욱 효율적으로 개발할 수 있도록 개선된 부분인 것 같다.</p>
+<ul>
+<li>GPT API를 활용하여 에이전트 형태의 경험을 제공하는 앱이 이미 개발되고 있는데, 과거에는 이를 개발하는 것이 어렵고 시간이 많이 걸렸다.하지만 새롭게 출시된 Assistants API를 통해 이를 더 쉽고 편리하게 할 수 있다.</li>
+<li>Assistants API에는 Threading, Python 인터프리터, Function calling 등 다양한 기능이 포함되어 있다.</li>
+<li>음성인식으로 만든 Assistant API를 통해서 Devday 참석자들에게 토큰 500달러를 지급하는 데모를 보여주었다!</li>
+</ul>
+</section>
+<section id="마무리하며" class="level3">
+<h3 class="anchored" data-anchor-id="마무리하며"><strong><u>#마무리하며</u></strong></h3>
+<ul>
+<li>OpenAI의 Devday를 통해 다양한 기능들이 소개되었다. GPT-4 Turbo는 기존의 GPT-3.5와 비교했을 때 더욱 강력한 기능들을 가지고 있었다. 특히 GPTs, GPT store가 출시됨에 따라 어떤 다양한 커스텀된 GPT들이 나올지 기대가 된다.</li>
+<li>AI가 모든 것에 통합되면서, 마치 스마트폰이 우리의 삶에 깊숙이 녹아든 것처럼, ChatGPT 없이는 생활이 불가능한 시대가 올 것 같다.</li>
+<li>인상깊었던 부분은, OpenAI가 많은 사람들이 인공지능 기술을 접근 가능하게 하기위해 노력하고 있는 부분이었다. OpensAI는 AI기술을 사용할 때 <strong>개인의 권한 및 효용성</strong>을 최고로 살리는 것이 중요하다는 점을 끊임없이 강조한다. 이를 통해 개인들이 더 나은 도구를 활용하여 세상을 변화시킬 수 있는 기회를 얻을 수 있을 것 같다.</li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
