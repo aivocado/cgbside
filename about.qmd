@@ -1,5 +1,5 @@
 ---
-title: "KPMG 캡스톤"
+title: "KPMG Capstone Project"
 about:
   template: jolla
   links:

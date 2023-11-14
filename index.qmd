@@ -1,5 +1,5 @@
 ---
-title: "CGBINSIDE"
+title: "CGBeta : CGINSIDE X KPMG Internship Team B"
 listing:
   contents: posts
   sort: "date desc"

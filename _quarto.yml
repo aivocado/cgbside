@@ -3,12 +3,12 @@ project:
   output-dir: "docs"
 
 website:
-  title: "<img src='images/BTEAM_logo.png' alt='CGINSIDE_TEAM B' style='width: 100px; height: auto;'>"
-
+  title: "<img src='images/BTEAM_logo.png' alt='CGINSIDE_TEAM B' style='width: 50px; height: auto;'>"
+  favicon: "images/beta_small_logo.png"
   navbar:
     left:
       - href: index.qmd
-        text: "홈"
+        text: "HOME"
       - text: "기술문서"
         menu: 
           - href: overview.qmd
@@ -25,7 +25,9 @@ website:
         href: https://twitter.com
 format:
   html:
-    theme: cosmo
+    theme: 
+      light: cosmo
+      dark: darkly
     css: styles.css
 
 
