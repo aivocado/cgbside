@@ -1,5 +1,4 @@
 ---
-
 title: "KPMG Capstone Project"
 image: "images/BTEAM_logo.png"
 about:
@@ -15,9 +14,6 @@ about:
 
 ---
 
-<div style="max-width: 300px; max-height: 200px; margin: 0 auto; text-align: center;">
-  <img src="/images/BTEAM_logo.png" alt="BTEAM Logo" style="width: 100%; height: auto;">
-</div>
 
 이홍주, 이화정, 홍수민 으로 구성된 팀입니다.
 
