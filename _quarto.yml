@@ -4,9 +4,9 @@ project:
 
 website:
   title: "CGBeta"
-  favicon: "images/beta_small_logo.png"
+  favicon: "images/favicon_logo.png"
   navbar:
-    logo: "images/BTEAM_logo.png"
+    logo: "images/main_logo.png"
     title: false
     left:
       - href: index.qmd
