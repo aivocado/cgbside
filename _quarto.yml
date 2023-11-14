@@ -3,32 +3,32 @@ project:
   output-dir: "docs"
 
 website:
-  title: "<img src='images/BTEAM_logo.png' alt='CGINSIDE_TEAM B' style='width: 50px; height: auto;'>"
+  title: "CGBeta"
   favicon: "images/beta_small_logo.png"
   navbar:
+    logo: "images/BTEAM_logo.png"
+    title: false
     left:
       - href: index.qmd
         text: "HOME"
       - text: "기술문서"
-        menu: 
+        menu:
           - href: overview.qmd
             text: "개발개요"
           - text: "-----------"
           - href: data.qmd
             text: "데이터"
-            
+
     right:
       - about.qmd
+
+    tools:
       - icon: github
         href: https://github.com/aivocado/cgbside
-      - icon: twitter
-        href: https://twitter.com
+
 format:
   html:
-    theme: 
+    theme:
       light: cosmo
       dark: darkly
     css: styles.css
-
-
-

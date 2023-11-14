@@ -9,9 +9,9 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "KPMG Capstone Project",
+    "title": "CGBeta",
     "section": "",
-    "text": "이홍주, 이화정, 홍수민 으로 구성된 팀입니다."
+    "text": "title: “KPMG Capstone Project” image: “images/BTEAM_logo.png” about: template: jolla image-shape: rectangle links: - icon: linkedin text: LinkedIn href: https://linkedin.com - icon: github text: Github href: https://github.com/aivocado/cgbside\n이홍주, 이화정, 홍수민 으로 구성된 팀입니다."
   },
   {
     "objectID": "index.html",
@@ -128,9 +128,15 @@
   {
     "objectID": "about.html#team-members",
     "href": "about.html#team-members",
-    "title": "KPMG Capstone Project",
-
+    "title": "CGBeta",
     "section": "Team Members",
     "text": "Team Members\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n이홍주\n이화정\n홍수민\n\n\n데이터 사이언티스트\n데이터 사이언티스트\n데이터 사이언티스트"
+  },
+  {
+    "objectID": "about.html#kpmg-capstone-project",
+    "href": "about.html#kpmg-capstone-project",
+    "title": "CGBeta",
+    "section": "KPMG Capstone Project",
+    "text": "KPMG Capstone Project\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n이홍주\n이화정\n홍수민\n\n\n데이터 사이언티스트\n데이터 사이언티스트\n데이터 사이언티스트"
   }
 ]
