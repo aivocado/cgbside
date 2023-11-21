@@ -52,8 +52,7 @@ image: "main_img.jpeg"
         ```
         
     - Output
-        
-        ![결과](output1.png)
+![결과](output1.png)
         
 
 ### 2. Feature 설명
