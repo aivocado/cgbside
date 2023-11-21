@@ -24,6 +24,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -211,19 +245,17 @@ ul.task-list li input[type="checkbox"] {
 <section id="law_mst.csv-파일-로드" class="level3">
 <h3 class="anchored" data-anchor-id="law_mst.csv-파일-로드">1. Law_MST.csv 파일 로드</h3>
 <pre><code>- 349810행 호출 오류
-    
-    &gt;💡 "251889","001740",해양수산부,선원법,"0007001",④,제7조,출항 전의 검사ㆍ보고의무 등,"제7조(출
-    ~~→ “” (따옴표)로 감싸지 않아서 파싱 과정에서 오류가 발생 (잘못 복사된 파일)~~
-    * 파일의 EOF가 잘못 설정되어 이를 수정함 
-    ⇒ 혹시 349810행 뒤에 짤린 부분이 있는지 확인 필요
-    
-- 따라서, 이를 제외하고 csv 파일을 로드하였음.
-    
-    ```python
-    data = pd.read_csv('law_mst.csv')
-    ```
-    
-- Output</code></pre>
+
+    </code></pre>
+<blockquote class="blockquote">
+<p>💡 “251889”,“001740”,해양수산부,선원법,“0007001”,④,제7조,출항 전의 검사ㆍ보고의무 등,“제7조(출 <br> <del>“” (따옴표)로 감싸지 않아서 파싱 과정에서 오류가 발생 (잘못 복사된 파일)</del> <br>파일의 EOF가 잘못 설정되어 이를 수정함 ⇒ 혹시 349810행 뒤에 짤린 부분이 있는지 확인 필요</p>
+</blockquote>
+<ul>
+<li>따라서, 이를 제외하고 csv 파일을 로드하였음.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'law_mst.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>- Output</code></pre>
+
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output1.png" class="img-fluid figure-img"></p>
