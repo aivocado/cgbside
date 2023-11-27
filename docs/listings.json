@@ -13,5 +13,17 @@
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html"
     ]
+  },
+  {
+    "listing": "/data.html",
+    "items": [
+      "/data_posts/MakeBaseTable.html"
+    ]
+  },
+  {
+    "listing": "/overview.html",
+    "items": [
+      "/dev_posts/MakeBaseTable.html"
+    ]
   }
 ]
