@@ -74,9 +74,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -174,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -185,31 +185,41 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1701072690273" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./dev_posts/MakeBaseTable.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./dev_posts/MakeBaseTable.html">
-<h3 class="no-anchor listing-title">
-Base Table 만들기
-</h3>
-<div class="listing-subtitle">
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
 
-</div>
-<div class="listing-description">
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+Title
+</th>
+<th>
+Author
+</th>
+</tr>
+</thead>
+<tbody class="list">
 
+<tr data-index="0" data-listing-file-modified-sort="1701145295778" data-listing-reading-time-sort="1" data-listing-title-sort="Base Table 만들기" data-listing-filename-sort="MakeBaseTable.ipynb">
+<td>
+<a href="./dev_posts/MakeBaseTable.html" class="title listing-title">Base Table 만들기</a>
+</td>
+<td>
+<span class="listing-author"></span>
+</td>
+</tr>
 
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./dev_posts/MakeBaseTable.html"> </a>
-</div>
-</div>
-</div>
+<tr data-index="1" data-listing-file-modified-sort="1701145715278" data-listing-reading-time-sort="1" data-listing-title-sort="EDA ( BaseTable_2.csv 사용 )" data-listing-filename-sort="BaseTable2_EDA.ipynb">
+<td>
+<a href="./dev_posts/BaseTable2_EDA.html" class="title listing-title">EDA ( BaseTable_2.csv 사용 )</a>
+</td>
+<td>
+<span class="listing-author"></span>
+</td>
+</tr>
+</tbody>
+
+</table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
