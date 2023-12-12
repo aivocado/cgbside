@@ -24,7 +24,9 @@
     "listing": "/overview.html",
     "items": [
       "/dev_posts/MakeBaseTable.html",
-      "/dev_posts/BaseTable2_EDA.html"
+      "/dev_posts/BaseTable2_EDA.html",
+      "/dev_posts/DL정리.html",
+      "/dev_posts/앙상블.html"
     ]
   }
 ]
