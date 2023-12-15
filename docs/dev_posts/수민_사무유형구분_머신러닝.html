@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>CGBeta - 사무유형구분_Random Forest</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/favicon_logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/main_logo.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">HOME</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">기술문서</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../overview.html" rel="" target="">
+ <span class="dropdown-text">개발개요</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../data.html" rel="" target="">
+ <span class="dropdown-text">데이터</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">KPMG Capstone Project</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/aivocado/cgbside" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">사무유형구분_Random Forest</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="라이브러리-및-데이터-불러오기" class="level2">
+<h2 class="anchored" data-anchor-id="라이브러리-및-데이터-불러오기">0. 라이브러리 및 데이터 불러오기</h2>
+<section id="폰트설정" class="level3">
+<h3 class="anchored" data-anchor-id="폰트설정">폰트설정</h3>
+<div class="cell" data-outputid="2d19179a-83aa-4f7c-e685-216ce804e121">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>sudo apt<span class="op">-</span>get install <span class="op">-</span>y fonts<span class="op">-</span>nanum</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>sudo fc<span class="op">-</span>cache <span class="op">-</span>fv</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>rm <span class="op">~/</span>.cache<span class="op">/</span>matplotlib <span class="op">-</span>rf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  fonts-nanum
+0 upgraded, 1 newly installed, 0 to remove and 23 not upgraded.
+Need to get 10.3 MB of archives.
+After this operation, 34.1 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/universe amd64 fonts-nanum all 20200506-1 [10.3 MB]
+Fetched 10.3 MB in 1s (9,326 kB/s)
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 78, &lt;&gt; line 1.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin: 
+Selecting previously unselected package fonts-nanum.
+(Reading database ... 120903 files and directories currently installed.)
+Preparing to unpack .../fonts-nanum_20200506-1_all.deb ...
+Unpacking fonts-nanum (20200506-1) ...
+Setting up fonts-nanum (20200506-1) ...
+Processing triggers for fontconfig (2.13.1-4.2ubuntu5) ...
+/usr/share/fonts: caching, new cache contents: 0 fonts, 1 dirs
+/usr/share/fonts/truetype: caching, new cache contents: 0 fonts, 3 dirs
+/usr/share/fonts/truetype/humor-sans: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/liberation: caching, new cache contents: 16 fonts, 0 dirs
+/usr/share/fonts/truetype/nanum: caching, new cache contents: 12 fonts, 0 dirs
+/usr/local/share/fonts: caching, new cache contents: 0 fonts, 0 dirs
+/root/.local/share/fonts: skipping, no such directory
+/root/.fonts: skipping, no such directory
+/usr/share/fonts/truetype: skipping, looped directory detected
+/usr/share/fonts/truetype/humor-sans: skipping, looped directory detected
+/usr/share/fonts/truetype/liberation: skipping, looped directory detected
+/usr/share/fonts/truetype/nanum: skipping, looped directory detected
+/var/cache/fontconfig: cleaning cache directory
+/root/.cache/fontconfig: not cleaning non-existent cache directory
+/root/.fontconfig: not cleaning non-existent cache directory
+fc-cache: succeeded</code></pre>
+</div>
+</div>
+<div class="cell" data-outputid="935d865f-dd53-47fa-fd3f-37473f02a928">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span>  matplotlib</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span>  matplotlib.font_manager  <span class="im">as</span> fm</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span>  matplotlib.pyplot  <span class="im">as</span> plt</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'◎ matplotlib version : '</span>, matplotlib.__version__)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>sys_font  <span class="op">=</span> fm.findSystemFonts ( )</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>[ font  <span class="cf">for</span>  font  <span class="kw">in</span>  sys_font  <span class="cf">if</span>  <span class="st">"Nanum"</span>  <span class="kw">in</span> font ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>◎ matplotlib version :  3.7.1
+</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>['/usr/share/fonts/truetype/nanum/NanumSquareR.ttf',
+ '/usr/share/fonts/truetype/nanum/NanumGothicCodingBold.ttf',
+ '/usr/share/fonts/truetype/nanum/NanumSquareRoundB.ttf',
+ '/usr/share/fonts/truetype/nanum/NanumMyeongjo.ttf',
+ '/usr/share/fonts/truetype/nanum/NanumGothicCoding.ttf',
+ '/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf',
+ '/usr/share/fonts/truetype/nanum/NanumSquareB.ttf',
+ '/usr/share/fonts/truetype/nanum/NanumBarunGothicBold.ttf',
+ '/usr/share/fonts/truetype/nanum/NanumMyeongjoBold.ttf',
+ '/usr/share/fonts/truetype/nanum/NanumGothic.ttf',
+ '/usr/share/fonts/truetype/nanum/NanumSquareRoundR.ttf',
+ '/usr/share/fonts/truetype/nanum/NanumGothicBold.ttf']</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fe <span class="op">=</span> fm.FontEntry(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    fname<span class="op">=</span><span class="vs">r'/usr/share/fonts/truetype/nanum/NanumGothic.ttf'</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'NanumGothic'</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>fm.fontManager.ttflist.insert(<span class="dv">0</span>, fe)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({<span class="st">'font.size'</span>: <span class="dv">18</span>, <span class="st">'font.family'</span>: <span class="st">'NanumGothic'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="라이브러리-및-데이터-불러오기-1" class="level3">
+<h3 class="anchored" data-anchor-id="라이브러리-및-데이터-불러오기-1">라이브러리 및 데이터 불러오기</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedShuffleSplit</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> lightgbm <span class="im">as</span> lgb</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, precision_score, recall_score, f1_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'/content/drive/MyDrive/KPMG 캡스톤/사무총조사/filter_df.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"/content/drive/MyDrive/KPMG 캡스톤/사무총조사/수행주체/subject_list.pkl"</span>,<span class="st">"rb"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    subject_list <span class="op">=</span> pickle.load(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># df_1: 사무판단 == 1인 행들만 있는 dataframe</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> df[df[<span class="st">'사무판단'</span>] <span class="op">==</span> <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'사무유형(대분류)'</span>] <span class="op">=</span> np.nan</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>scale_n <span class="op">=</span> [<span class="st">'국가직접처리사무'</span>, <span class="st">'특별지방행정기관사무'</span>, <span class="st">'국가위탁사무'</span>, <span class="st">'시도위임사무'</span>, <span class="st">'시군구위임사무'</span>, <span class="st">'시군구재위임사무'</span>, <span class="st">'시도및시군구위임사무'</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>scale_p <span class="op">=</span> [<span class="st">'국가-시도-시군구공동사무'</span>, <span class="st">'국가-시도공동사무'</span>, <span class="st">'국가-시군구공동사무'</span>]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>scale_r <span class="op">=</span> [<span class="st">'시도직접처리사무'</span>, <span class="st">'시도위탁사무'</span>, <span class="st">'시군구직접처리사무'</span>, <span class="st">'시군구위탁사무'</span>, <span class="st">'시도-시군구공동사무'</span>, <span class="st">'시도-시군구위임사무'</span>]</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ii <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(df_1)):</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  minitask <span class="op">=</span> <span class="bu">str</span>(df_1.iloc[ii,<span class="dv">24</span>])</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> minitask <span class="op">==</span> <span class="st">'nan'</span>:</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    df_1.iloc[ii,<span class="dv">28</span>] <span class="op">=</span> <span class="st">'0'</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elif</span> minitask <span class="kw">in</span> scale_n:</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    df_1.iloc[ii,<span class="dv">28</span>] <span class="op">=</span> <span class="st">'국가'</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elif</span> minitask <span class="kw">in</span> scale_p:</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    df_1.iloc[ii,<span class="dv">28</span>] <span class="op">=</span> <span class="st">'공동'</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elif</span> minitask <span class="kw">in</span> scale_r:</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    df_1.iloc[ii,<span class="dv">28</span>] <span class="op">=</span> <span class="st">'지방'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="33893df7-060d-48a0-945e-8ad0f87ecb57">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># '조문' string으로 바꾸기</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df_1 속 '조문'이 결측치인 행 2개 존재</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'조문'</span>] <span class="op">=</span> df_1[<span class="st">'조문'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">''</span> <span class="cf">if</span> pd.isna(x) <span class="cf">else</span> <span class="bu">str</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df_1['조문'] = df_1['조문'].apply(lambda x: '' if pd.isna(x) else str(x))</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="column들-생성" class="level2">
+<h2 class="anchored" data-anchor-id="column들-생성">1. column들 생성</h2>
+<section id="st-column-생성-가장-많이-들어있는-수행주체-index-23개-추출" class="level3">
+<h3 class="anchored" data-anchor-id="st-column-생성-가장-많이-들어있는-수행주체-index-23개-추출">1st column 생성: 가장 많이 들어있는 수행주체 index 2~3개 추출</h3>
+<ul>
+<li>수행주체_freq1: 가장 많이 들어있는 수행주체 index</li>
+<li>수행주체_freq2: 두 번째로 많이 들어있는 수행주체 index</li>
+<li>수행주체_freq3: 세 번째로 많이 들어있는 수행주체 index</li>
+</ul>
+<div class="cell" data-outputid="df718e0d-0e3b-41d4-fc55-c740dde94557">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_1.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="49">
+<pre><code>Index(['Unnamed: 0', '소관부처명', '법령명', '법령구분', '조번호', '항번호', '호번호', '조문제목', '조문',
+       '사무판단', '사무판단근거', '사무명', '수행주체', '사무유형', '위임사무판단', '위임근거규정', '수임기관',
+       '특행기관', '재위임사무판단', '재위임근거규정', '재수임기관', '위탁사무판단', '위탁근거규정', '수탁기관',
+       '사무유형(소분류)', '기타', '조문_명_동', 'new_수행주체', '사무유형(대분류)', '수행주체_freq1',
+       '수행주체_freq2', '수행주체_freq3', '수행주체_국가', '수행주체_지방', '수행주체_공동',
+       '수행주체_국가_교', '수행주체_지방_교', '수행주체_공동_교'],
+      dtype='object')</code></pre>
+</div>
+</div>
+<div class="cell" data-outputid="982eed10-28ef-4569-edde-9cbfb22f0601">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'new_수행주체'</span>] <span class="op">=</span> df_1[<span class="st">'new_수행주체'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">''</span> <span class="cf">if</span> pd.isna(x) <span class="cf">else</span> <span class="bu">str</span>(x))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>word_vec <span class="op">=</span> []</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> df_1[<span class="st">'new_수행주체'</span>]:</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    row_vec <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="bu">len</span>(subject_list)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> subject <span class="kw">in</span> subject_list:</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        count <span class="op">=</span> item.count(subject)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> count <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>            index <span class="op">=</span> subject_list.index(subject)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>            row_vec[index] <span class="op">+=</span> count</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    word_vec.append(row_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df_1['new_수행주체'] = df_1['new_수행주체'].apply(lambda x: '' if pd.isna(x) else str(x))</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>word_vec <span class="op">=</span> pd.DataFrame(word_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="c6c5b8b7-7f52-4c77-d9c8-c740d5f941a9">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_nlargest_index(row, n):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> row.nlargest(n).iloc[<span class="op">-</span><span class="dv">1</span>] <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.nan</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> row.nlargest(n).index[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 각 열에 대한 값을 계산하고 NaN 조건을 적용합니다.</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'수행주체_freq1'</span>] <span class="op">=</span> word_vec.<span class="bu">apply</span>(<span class="kw">lambda</span> row: np.nan <span class="cf">if</span> row.<span class="bu">max</span>() <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> row.idxmax(), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'수행주체_freq2'</span>] <span class="op">=</span> word_vec.<span class="bu">apply</span>(<span class="kw">lambda</span> row: get_nlargest_index(row, <span class="dv">2</span>), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'수행주체_freq3'</span>] <span class="op">=</span> word_vec.<span class="bu">apply</span>(<span class="kw">lambda</span> row: get_nlargest_index(row, <span class="dv">3</span>), axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df_1['수행주체_freq1'] = word_vec.apply(lambda row: np.nan if row.max() == 0 else row.idxmax(), axis=1)
+&lt;ipython-input-10-6c8980145691&gt;:9: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df_1['수행주체_freq2'] = word_vec.apply(lambda row: get_nlargest_index(row, 2), axis=1)
+&lt;ipython-input-10-6c8980145691&gt;:10: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df_1['수행주체_freq3'] = word_vec.apply(lambda row: get_nlargest_index(row, 3), axis=1)</code></pre>
+</div>
+</div>
+<div class="cell" data-outputid="0188f916-5e19-4122-e4a8-aa6653c6e6d2">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NaN값에는 그냥 2000 넣어줌, 자료형 int로 바꿔줌</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df_1[[<span class="st">'수행주체_freq1'</span>, <span class="st">'수행주체_freq2'</span>, <span class="st">'수행주체_freq3'</span>]] <span class="op">=</span> df_1[[<span class="st">'수행주체_freq1'</span>, <span class="st">'수행주체_freq2'</span>, <span class="st">'수행주체_freq3'</span>]].fillna(<span class="dv">2000</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> df_1.astype({<span class="st">'수행주체_freq1'</span>: <span class="st">'int'</span>, <span class="st">'수행주체_freq2'</span>: <span class="st">'int'</span>, <span class="st">'수행주체_freq3'</span>: <span class="st">'int'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df_1[['수행주체_freq1', '수행주체_freq2', '수행주체_freq3']] = df_1[['수행주체_freq1', '수행주체_freq2', '수행주체_freq3']].fillna(2000)</code></pre>
+</div>
+</div>
+</section>
+<section id="nd-column-생성-국가-지방-공동에-들어있는-수행주체-구분하기" class="level3">
+<h3 class="anchored" data-anchor-id="nd-column-생성-국가-지방-공동에-들어있는-수행주체-구분하기">2nd column 생성: ‘국가’, ‘지방’, ’공동’에 들어있는 수행주체 구분하기</h3>
+<ul>
+<li>수행주체_국가: ’국가사무’에만 존재하는 수행주체가 ’조문’에서 언급된 횟수</li>
+<li>수행주체_지방: ’지방사무’에만 존재하는 수행주체가 ’조문’에서 언급된 횟수</li>
+<li>수행주체_공동: ’공동사무’에만 존재하는 수행주체가 ’조문’에서 언급된 횟수</li>
+</ul>
+<hr>
+<ul>
+<li>수행주체_국가_교: ’국가사무’에 존재하는 수행주체가 ’조문’에서 언급된 횟수</li>
+<li>수행주체_지방_교: ’지방사무’에 존재하는 수행주체가 ’조문’에서 언급된 횟수</li>
+<li>수행주체_공동_교: ’공동사무’에 존재하는 수행주체가 ’조문’에서 언급된 횟수</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_country <span class="op">=</span> df_1[df_1[<span class="st">'사무유형(대분류)'</span>] <span class="op">==</span> <span class="st">'국가'</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df_province <span class="op">=</span> df_1[df_1[<span class="st">'사무유형(대분류)'</span>] <span class="op">==</span> <span class="st">'지방'</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df_both <span class="op">=</span> df_1[df_1[<span class="st">'사무유형(대분류)'</span>] <span class="op">==</span> <span class="st">'공동'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 국가사무, 지방사무, 공동사무 각각의 조문에 언급된 수행주체 뽑아내기</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 국가사무 '조문'에 들어있는 수행주체</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>subject_country <span class="op">=</span> []</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> subject <span class="kw">in</span> subject_list:</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> df_country[<span class="st">'조문'</span>].<span class="bu">str</span>.contains(subject).<span class="bu">any</span>():</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    subject_country.append(subject)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 지방사무 '조문'에 들어있는 수행주체</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>subject_province <span class="op">=</span> []</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> subject <span class="kw">in</span> subject_list:</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> df_province[<span class="st">'조문'</span>].<span class="bu">str</span>.contains(subject).<span class="bu">any</span>():</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    subject_province.append(subject)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 공동사무 '조문'에 들어있는 수행주체</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>subject_both <span class="op">=</span> []</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> subject <span class="kw">in</span> subject_list:</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> df_both[<span class="st">'조문'</span>].<span class="bu">str</span>.contains(subject).<span class="bu">any</span>():</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    subject_both.append(subject)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="0706a616-aa2d-42af-c077-dcb5007f54af">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>set_country <span class="op">=</span> <span class="bu">set</span>(subject_country)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>set_province <span class="op">=</span> <span class="bu">set</span>(subject_province)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>set_both <span class="op">=</span> <span class="bu">set</span>(subject_both)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 국가, 지방, 공동사무 모두에 존재하는 수행주체</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>common_elements <span class="op">=</span> set_country.intersection(set_province).intersection(set_both)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 국가사무에만 존재하는 수행주체</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>unique_country <span class="op">=</span> set_country <span class="op">-</span> set_province <span class="op">-</span> set_both</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 지방사무에만 존재하는 수행주체</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>unique_province <span class="op">=</span> set_province <span class="op">-</span> set_country <span class="op">-</span> set_both</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 공동사무에만 존재하는 수행주체</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>unique_both <span class="op">=</span> set_both <span class="op">-</span> set_country <span class="op">-</span> set_province</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 결과 출력</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'=================='</span>)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"국가, 지방, 공동 모두 존재"</span>)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"주체:"</span>, common_elements)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"개수:"</span>,<span class="bu">len</span>(common_elements))</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'=================='</span>)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"국가사무에만 존재"</span>)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"주체:"</span>, unique_country)</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"개수:"</span>,<span class="bu">len</span>(unique_country))</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'=================='</span>)</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"지방사무에만 존재"</span>)</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"주체:"</span>, unique_province)</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"개수:"</span>,<span class="bu">len</span>(unique_province))</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'=================='</span>)</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"공동사무에만 존재"</span>)</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"주체:"</span>, unique_both)</span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"개수:"</span>,<span class="bu">len</span>(unique_both))</span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'=================='</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>==================
+국가, 지방, 공동 모두 존재
+주체: {'기업체', '지방의회', '통계청', '특별시', '지방국세청', '행정관청', '청장', '산림조합중앙회', '소장', '자산관리공사', '신청인', '행정청', '실무위원회', '주무부처', '재단', '외국환은행', '정부', '사법경찰관', '하고자 하는 자', '물품관리관', '지방식품의약품안전청장', '식물검역기관', '추천위원회', '국장', '직업교육훈련기관', '지방환경청', '은행', '광역지방자치단체', '수산청', '보훈병원', '호의 기관', '중앙행정기관', '사범대학', '검역기관', '유치원', '국민안전처장관', '해양경찰청', '허가관청', '수면관리자', '공원관리청', '사업계획승인권자', '요구권자', '지방공기업', '관리권자', '국가기관', '대통령령으로 정하는 공공기관', '간사', '자치구', '감사', '노동부장관', '교육단체', '한국토지주택공사', '궤도사업자', '임용권자', '피해아동', '지역군사령관', '변호사', '소방청', '원자력안전위원회', '한국환경공단', '발주청', '특허청', '사업단', '법무부', '이전공공기관', '수익자', '재난관리책임기관', '관측기관', '자치구구청장', '학교', '지방토지수용위원회', '신고한 자', '도의회', '개발원', '신용카드업자', '보호기관', '중앙대책본부장', '통일부', '위원장', '대통령', '댐건설사업시행자', '군인', '금융기관', '지역자활센터', '처장', '시ㆍ군', '영사', '시행자', '하천관리청', '지방도로관리청', '한국보훈복지의료공단', '중앙회', '단체', '구조ㆍ구급대원', '공공단체', '국가유공자', '농림축산식품부', '시ㆍ군ㆍ자치구', '손실을 입은 자', '관장', '사업시행자', '진흥원', '국가기술표준원', '건강보험공단', '시·구', '심판원', '보장기관', '지방병무청', '관리', '법원', '납세의무자', '국무총리', '수사기관', '사업자', '연합체', '이사장', '공공하수도관리청', '이사회', '국립수산과학원', '검정기관', '정부출연연구기관', '경찰공무원', '교육장', '보건복지부장관', '근로복지공단', '직업안정기관의 장', '체육단체', '임대사업자', '법정대리인', '소방대', '부대', '일괄협의회', '건축위원회', '연구개발기관', '세관', '재외공관', '식물방제관', '의료기관', '시ㆍ도교육감', '농업ㆍ농촌및식품산업정책심의회', '공익법인', '기술원', '지방공단', '수립권자', '기술보증기금', '종합신용정보집중기관', '협회', '심의회', '사장', '시ㆍ도 가축방역기관', '특별자치도지사', '소방기관', '협의회', '중소벤처기업진흥공단', '읍장', '시ㆍ도', '토지주택공사', '경찰관', '분쟁조정위원회', '도지사', '보건의료기관', '관청', '아동복지시설', '교정시설', '군부대', '출자ㆍ출연 기관', '주무관청', '정신건강복지센터', '환경분쟁조정위원회', '병무청', '중소벤처기업부', '입안권자', '한국자산관리공사', '사업주체', '기금', '해양수산부', '시ㆍ도교육청', '철도운영자', '지역대책본부', '사령관', '지방대학', '공판장', '공무원', '기획재정부', '공사', '처분권자', '인사위원회', '공기업', '전문위원회', '시설관리자', '대통령령으로 정하는 자', '행정사법인', '연구원', '학교운영위원회', '국립대학', '식품의약품안전처', '산업대학', '승인관청', '군수', '특별자치도', '구호지원기관', '광주광역시', '하려는 자', '공단', '민방위 대장', '감사원', '국방부', '운영위원회', '함대사령관', '지정권자', '세종특별자치시', '중앙통제단장', '한국지역정보개발원', '국립학교', '면장', '신용보증기금', '국립농산물품질관리원', '가축방역기관장', '본부', '건설엔지니어링사업자', '시ㆍ도 교육청', '철도시설관리자', '시험연구기관', '연구기관', '중앙도시계획위원회', '경찰관서', '대도시', '도매시장 개설자', '행정안전부', '지방환경관서', '부처', '수습본부', '농촌진흥청', '총리', '감독기관', '수탁기관', '소유자', '사회복지법인', '세무공무원', '정책심의위원회', '국민건강보험공단', '세무서', '국민연금공단', '받은 자', '출납공무원', '장관', '국가균형발전위원회', '대학', '국세청', '지방고용노동관서', '센터', '지방도시계획위원회', '피해자', '보험회사', '허가권자', '사무소', '인증기관', '지방자치단체조합', '사립학교', '의장', '광역시', '소방관서', '교육행정기관', '읍·면', '체신관서', '공공보건의료기관', '설립자', '시ㆍ도경찰청', '지방해양수산청장', '문화체육관광부', '대법원', '이해관계인', '검찰청', '교육위원회', '지휘관', '평생교육시설', '교육부', '구청장', '등록관청', '실무위원', '중앙선거관리위원회', '원천징수의무자', '위원회', '초등학교', '지방자치단체', '지청', '대통령령으로 정하는 기관', '학교법인', '관리자', '중앙관서', '검역본부', '읍·면·동', '감정평가법인', '교육감', '산업단지지정권자', '특구 시ㆍ도지사', '영구기록물관리기관', '금융위원회', '한국은행', '교육지원청', '과학기술정보통신부', '전문대학', '교육기관', '민원실', '식물검역관', '금융위원', '심사위원회', '공공기관', '신고관청', '긴급구조기관', '관리주체', '지방공사', '국가', '유관기관', '경찰청', '지적소관청', '의료시설', '건설사업자', '구청', '기관', '질병관리청', '특별자치시ㆍ도', '검사', '시ㆍ도지사', '지방산림청', '한국농어촌공사', '문화재청', '발급기관', '산업통상자원부', '준정부기관', '지방분쟁조정위원회', '공정거래위원회', '위탁기관', '승인권자', '환경부', '지방검찰청', '읍ㆍ면ㆍ동', '중학교', '특별자치시', '행정협의회', '교육훈련기관', '시ㆍ도본부', '경찰서', '시ㆍ도 서비스원', '수납기관', '전문가', '외교부', '지방해양경찰청', '지방의회의 의장', '행정부', '판사', '정책위원회', '개발센터', '금융회사', '선거관리위원회', '유역환경청', '관리청', '소방대원', '세무서장', '발주자', '소재지', '지방교통위원회', '조달청', '거주자', '시ㆍ군ㆍ구', '국립가축방역기관', '사회보장위원회', '제주특별자치도', '검찰', '산림청', '경영자', '국립국제교육원', '육군', '일반수도사업자', '행정기관', '물류기업', '시·구·읍·면', '동장', '아동보호전문기관', '도로관리청', '배치기관', '수도사업자', '국회', '재무관', '사무처', '소위원회', '통제단장', '심의위원회', '이전기관', '시장', '소방서', '해양경찰서', '사법경찰관리', '진흥재단', '미술관', '테러대책협의회', '등록기관', '시·도지사', '읍ㆍ면', '보건소', '징계위원회', '소비자', '전라북도지사', '판매자', '지정행정기관의 장', '지원단', '시·군·구', '소관청', '시민고충처리위원회', '고용노동부', '제주자치도', '지하시설물관리자', '공인회계사회', '진흥공단', '도교육감', '박물관', '도시철도공사', '보장원', '지역통제단장', '자치구의 구청장', '교장', '지원센터', '한국수자원공사', '관리기관', '연합회', '통합심의위원회', '전담의료기관', '민방위대', '토지수용위원회', '시ㆍ도의 교육감', '국토교통부', '국립수목원', '등기소', '고등학교', '경찰', '입주자', '기록물관리기관', '업체', '서울특별시', '전문기관', '소방본부', '농업협동조합중앙회', '지원위원회', '정부기관', '주택건설등록업자', '원장', '여성가족부', '토양관련전문기관', '교육시설', '도서관', '연구회', '주무부장관'}
+개수: 452
+==================
+국가사무에만 존재
+주체: {'특별지방행정기관', '희귀질환지원센터', '자원봉사진흥위원회', '독학학위운영위원회', '외국세무자문사등록부', '조직은행', '농업재해보험심의회', '미합중국 주재 관할 총영사', '극장', '한국공정거래조정원', '야생동물검역기관', '수송관서', '국민건강증진정책심의위원회', '중앙방사능방재대책본부', '국민연금기금', '소년분류심사원', '제출대상법인', '수요기관', '국세예규심사위원회', '순천시', '지방우정청장', '중소기업유통센터', '인터넷주소관리기관', '온라인투자연계금융협회', '사립학교교직원연금공단', '복권위원회', '입영부대', '국립정신병원', '전자송달대행기관', '장기등이식윤리위원회', '자연경관심의위원회', '감염병관리위원회', '국가경찰위원회', '지방청장', '항공안전본부장', '발명기관', '예비군중대장', '혁신금융사업자', '재활시설운영심의위원회', '한국은행총재', '법교육위원회', '기술혁신 추진위원회', '국가시책사업심의회', '군무원', '군 책임운영기관운영위원회', '혁신금융심사위원회', '폐자원에너지센터', '친일반민족행위진상규명위원회', '출입국관리 공무원', '공공보건의료정책심의위원회', '비상장은행', '주 미합중국 대한민국 대사', '수도권정비위원회', '공급기관', '고등검찰청', '지방노동위원회', '국가정보자료관리협의회', '산업표준심의회', '지역지식재산센터', '청소년정책위원회', '합동성위원회', '수질오염방제센터', '청사관리기관의 장', '수입공무원', '대한민국법인', '해양경찰관서', '국가생물다양성센터', '수도권대기환경청', '국립종자원', '상공부', '첨단바이오의약품 심의위원회', '소형선박 등록관청', '세월호 선체조사위원', '한국교육개발원', '국무위원', '중앙방제대책본부', '차관보', '대통령기록물생산기관', '일자리위원회', '민주화운동관련자명예회복및보상심의위원회', '국가노후준비위원회', '국가기록관리위원회', '우편대체관서', '방첩기관', '임명권자', '심사원', '부문별관장기관의 장', '합참의장', '국립결핵병원', '광산안전위원회', '공공데이터제공책임관', '사행산업통합감독위원회', '지방교정청', '임금채권보장기금심의위원회', '대한공증인협회', '의료재활소년원', '책임경영지원센터', '말소된 등록을 회복하려는 자', '항만시설 소유자', '데이터기반행정 책임관', '주무장관', '유치지역지원위원회', '지방해양항만관청', '방송광고균형발전위원회', '등록공무원', '거래소', '한국보건의료연구원', '징벌위원회', '중장기전략위원회', '인증원', '조달품질원', '접경지세관', '등록공관', '출입항신고기관의 장', '영화진흥위원회', '해양항만관청', '국내대책위원회', '발송관서', '계정출납명령관', '기술진흥전문기관', '재외국민보호위원회', '국채사무처리기관', '군수사기관', '공적자금관리위원회', '중앙암등록본부', '국ㆍ공립의 박물관', '판매기관의 장', '파산참가기관', '전용실시권자', '우수품질인증을 받은 자', '협동조합정책심의위원회', '조직기증지원기관', '검찰부', '다문화가족정책위원회', '전문교육훈련기관', '녹색건축센터', '신고업무 수탁기관', '법령안 주관기관', '출입국관리사무소장', '항공운송사업자', '실무회의', '교육ㆍ사회 및 문화 관계장관회의', '군사망사고진상규명위원회', '공공측량시행자', '군교정시설', '심사대행기관', '특허심판원', '국가인권위원회', '기술정보진흥원', '대통령기록관', '국가통계위원', '첨단재생의료', '적립금운용심의회', '국가암관리위원회', '합동참모본부', '경제관계장관회의', '자활복지개발원장', '운항시각조정기관', '군사법원', '한국토지주택공사사장', '전력정책심의회', '예탁신청자', '중앙구조본부', '징발관', '대통령기록관리전문위원회', '도로관리권자', '한국은행 총재', '국가경찰관서', '장애인정책조정위원회', '도시ㆍ군관리계획의 결정권자', '디엔에이신원확인정보담당자', '소비자분쟁조정위원회', '이의신청심의위원회', '과거사연구재단', '국회 정보위원회', '기술전문위원회', '해양경찰관', '남북교류협력 추진협의회', '발령권자', '중앙수산조정위원회', '호송관', '자살유발정보예방협의회', '해상구조조정본부', '디자인등록출원인', '순국선열ㆍ애국지사사업기금 및 보훈기금운용심의회', '5·18민주화운동 진상규명조사위원회', '국가위원회', '증권선물위원회', '기금운용심의회', '국립해양조사원', '외국인정책위원회', '스마트도시협회', '양성평등교육심의회', '국가지식재산위원회', '수소경제위원회', '국립과학수사연구원', '재산관리관', '대통령기록물생산기관의 기록관', '긴급재정관리단체', '사업재편계획심의위원회', '국방정보화책임관협의회', '소년원', '우편관서', '다목의 기관의 장', '수출지원센터', '국가생명윤리심의위원회', '우정사업정보센터', '특수기록관', '대외경제장관회의', '한국원자력안전기술원의 장', '주민등록사무감독기관', '어업재해보험심의회', '한국승강기안전공단', '경찰교육기관', '징계권자의 차상급 부대 또는 기관', '금융투자상품거래청산회사', '본부심의회', '한국환경산업기술원', '검찰관', '의약품관리종합정보센터', '감항인증심의위원회', '검찰인사위원회', '고용보험위원회', '화물터미널운영자', '통상조약 국내대책위원회', '정부대표', '벤처기업확인기관', '신용평가회사', '시험실시권자', '경찰병원', '자치분권위원회', '경호처', '상장은행지주회사', '진상조사위원회', '한의약육성발전심의위원회', '국가물관리위원', '자동차보험정비협의회', '토지비축위원회', '국립소록도병원', '초고층 건축물등의 관리주체', '보훈기금운용심의회', '국가교육회의', '농약안전성심의위원회', '국립통일교육원', '신용정보협회', '경쟁력위원회', '물품사용공무원', '한강홍수통제소장', '금융보안원', '방위사업감독관', '국방과학연구소', '국립환경과학원', '수용기관', '공적연금연계협의체', '대한변호사협회', '지방법원판사', '금융복합기업집단', '무역위원회', '해병대사령부', '공공외교위원회', '선사용자금출납명령관', '전문수사자문위원', '지하정보관리기관의 장', '감사관', '석면피해구제심사위원회', '재결청', '사면심사위원회', '계엄사령관', '군보건의료기관', '자살예방정책위원회', '처리과의 장', '전문은행', '품질인정기관', '국가안전보장회의', '한국독립운동사연구소', '발급권한기관', '한국급경사지안전협회', '소방기장', '지역방송발전위원회', '한국수출입은행장', '세월호 선체조사위원회', '국가안보실', '취업지원실시기관', '국가치매관리위원회', '기금재수탁자', '중소기업자단체', '물류관련 전문기관', '책임운영기관운영심의회', '학교도서관진흥위원회', '농지보전부담금체납정리심의회', '시ㆍ도 협동조합정책협의회', '국가핵융합위원회', '휴면보험금등관리위원회', '국가평생교육진흥원', '출입국자', '지방항공청장', '납세자보호위원회', '한국원자력의학원의 장', '국방기술품질원', '한국직업능력개발원', '화학물질안전원장', '고위공직자범죄수사처', '국세심사위원회', '통제권자', '군교도관', '국가건축정책위원회', '치료감호심의위원회', '지방법원 판사', '검찰단장', '국가산학연협력위원회', '임상연구심의위원회', '방송분쟁조정위원회', '세무사징계위원회', '국립외교원', '추모위원회', '공공관리주체', '의약품안전관리원', '군검사', '관세심사위원회', '정부위원', '필수업무 지정 및 종사자', '국립환경인력개발원', '보관금을 납부한 자', '금융정보분석원', '금융분쟁조정위원회', '중요지표사용기관', '외국인보호소', '신속대응팀', '대체복무기관', '재난원인조사단', '교원소청심사위원회', '국무조정실', '산업융합 규제특례심의위원회', '주재무관', '법무연수원', '치료감호소', '한국해양교통안전공단', '중앙감염병병원', '국가인적자원위원회', '국민경제자문회의', '국가정보자원관리원장', '교도관', '아동자립지원추진협의회', '물류관련기관', '지방과학기술진흥협의회', '산업재해보상보험및예방심의위원회', '화학물질관리위원회', '소년원학교', '교수임용심의위원회', '중앙소음대책심의위원회', '소관부', '한국재정정보원', '수의사 국가시험위원회', '국가병원체자원은행', '지방고용노동청', '범죄피해재산환부심의회', '남극활동감시원', '재정운용위원회', '지방검찰청검사장', '환자안전위원회', '치료감호시설의 장', '산림탄소센터', '중증질환심의위원회', '통합환경관리정보공개심의위원회', '아동정책조정위원회', '군인복지위원회', '연구기관의 원장 및 감사', '금융감독위원회', '지방검찰청지청', '군사안보지원사령부', '행정자치부장관', '직할부대장', '중앙 사회서비스원', '전직 대통령', '검사위원회', '명예회복위원회', '국가표준심의회', '2023 순천만국제정원박람회조직위원회', '관서운영경비출납공무원', '우정사업본부', '중앙생활보장위원회', '군검찰관', '국가보안기관', '국립조직기증관리기관', '새만금청', '대검찰청', '여수ㆍ순천 10ㆍ19사건진상규명및희생자명예회복위원회', '북한인권기록보존소', '갈등관리심의위원회', '정책기획위원회', '정보수사기관', '맞춤형화장품판매업자', '수출지원기관', '한센인피해사건진상규명위원회', '청년고용촉진특별위원', '보안관찰처분심의위원회', '공공자금관리기금운용위원회', '미래창조과학부', '운영심의회', '공공데이터 포털', '분과위원회', '보험요율 산출기관', '한국산업안전보건공단', '농수산물품질관리심의회', '의무소방대 소속 기관', '특별검사', '가석방심사위원회', '국내복귀기업지원위원회', '공군작전사령관', '복지사업심의위원회', '화학물질평가위원회', '형사사법업무 처리기관 소속 공무원', '남북관계발전위원회', '자동차손해배상진흥원', '자격정책심의회', '군정비부대', '재원운영자', '이행관리원', '국립공원위원회', '국방개혁위원회', '일반군무원', '지하개발사업자', '공군참모총장', '장성급 지휘관', '한국교육학술정보원장', '출입국관리사무소출장소장', '군판사', '군사경찰부대의 지휘관', '통관지 세관장', '우정사업총괄기관', '중앙책임운영기관', '방송문화진흥회', '디엔에이인적관리자', '예탁결제원', '회계 관계 공무원', '신체등급판정 사무를 담당하는 병무청 소속기관', '긴급재정관리인', '보통징계위원회', '지방세무관서', '국가책임기관', '대사관', '특별노동위원회', '국가통계위원회', '유치장', '중앙사무관장기관', '국방부직할부대', '검역소', '징계권자의 부대', '고용정책심의회', '금고은행', '석면안전관리위원회', '특별검사후보추천위원회', '복무 기관', '통관지세관장', '전적학교', '대한소방공제회', '정부청사관리소', '임면권자', '법무부징계위원회', '면직심사위원회', '수형자', '심판장', '대한약전', '사세청', '유료도로관리청', '시ㆍ도 경제협의회', '근로시간면제심의위원회', '해양항만청장', '교수징계위원회', '국가경찰기관', '특례심의위원회', '한국인원자폭탄피해자지원위원회', '한국보건산업진흥원장', '갱생보호회지소장', '해군작전사령관', '전자수입인지업무대행기관', '국제감축심의회', '우체국보험특별회계', '진급권자', '융자기관', '보수지급기관', '최저임금위원회', '출국항 관할 세관장', '세관공무원', '화장품책임판매업자', '중증장애인생산품우선구매촉진위원회', '국가테러대책위원회', '중앙징계위원회', '제품검사기관', '수출입은행', '대한상공회의소', '북방경제협력위원회', '기상관측표준화위원회', '특별감찰관', '경제자유구역위원회', '중요지표산출기관', '실무조정회의', '처우ㆍ징계위원회', '경제교육단체', '우체국예금특별회계', '공관장', '방송통신심의위원회', '국가시범도시지원단', '사학분쟁조정위원회', '군종장교운영심사위원회', '참모총장', '식품산업진흥심의회', '소방장비관리 공무원', '중앙심판원', '해양경찰기관', '심판관', '발행은행', '작전지휘관', '사법연수원', '국가건강검진위원회', '도로교통공단', '국방관서', '세입징수관', '계약상대방', '주채무자', '한국인터넷진흥원', '한국장학재단', '국가수자원관리위원회', '유료도로관리권자', '대한민국재외공관', '한국의료기기안전정보원', '보험료부과제도개선위원회', '방위사업청', '행정부 내 각급 기관', '데이터전문기관', '징발집행관', '중앙기록물관리기관', '과제담당관', '납북피해자보상및지원심의위원회', '에너지위원회', '보세판매장 제도운영위원회', '경제사회노동위원회', '중앙응급의료위원회', '국정원', '국가헌혈추진협의회', '건축허가관청', '국가공간정보위원회', '의료기관인증위원회', '디자인권자', '건강보험분쟁조정위원회', '관세청', '공무원연금공단', '지역특화작목위원회', '책임운영기관의 장', '중앙주소정보위원회', '국사편찬위원회', '중소기업은행', '한국보건의료인국가시험원', '운송수단의 장', '예금보험공사', '보훈심사위원회', '근로감독관', '업무를 인계ㆍ인수하는 사람', '보행환경정책연구센터', '검찰서기', '국립재활원', '발굴단', '순회점검 공무원'}
+개수: 563
+==================
+지방사무에만 존재
+주체: {'면허의 부여기관', '징수공무원', '시ㆍ군ㆍ구대책본부', '공원수탁관리자', '우리나라의 권한 있는 당국', '명예시장', '지역민방위협의회', '부구청장', '재생사업지구지정권자', '지방보조사업자', '시ㆍ도교육위원회', '지역발달장애인지원센터', '충청북도', '범칙사건조사공무원', '시·군·구의 관할 보건소', '시ㆍ도특수교육운영위원회', '법제심의위원회', '대장소관청', '제주특별자치도세관장', '시ㆍ군ㆍ구기록물관리기관', '시ㆍ도 안전관리위원회', '등기ㆍ등록관서', '예산성과금심사위원회', '시ㆍ도대책본부', '권한을 대행하는 사람', '현장지휘관', '시·도위원회', '정신건강심의위원회', '검정고시위원회', '통합지휘조정통제센터', '사학정비심사위원회', '지방자치단체의 금고', '지역환경보건위원회', '시ㆍ도교육과정정상화심의위원회', '시ㆍ도기록물관리기관', '시ㆍ군ㆍ구 통합방위협의회', '시ㆍ도 협의회', '어항관리청', '제주자치도경찰청', '지역인적자원개발협의회', '시ㆍ도주소정보위원회', '여수ㆍ순천 10ㆍ19사건진상규명및희생자명예회복실무위원회', '시ㆍ도 공공보건의료위원회', '중학교입학추첨관리위원회', '스마트도시사업협의회', '시ㆍ군ㆍ구긴급구조통제단', '학력심의위원회', '시ㆍ도 사회서비스원', '충청북도지사', '의료기관개설위원회', '사용신고관청', '구ㆍ시ㆍ읍ㆍ면', '지방탄소중립녹색성장위원회', '시ㆍ군ㆍ구주소정보위원회', '사업승인권자', '가축전염병피해보상협의회', '자치경찰인사위원회', '해안권발전공동협의회', '국가교육위원회', '지방자치단체의 인사위원회', '사무과', '공공시설을 관리하는 자', '한국주택금융공사', '시ㆍ도긴급구조통제단', '면허부여기관', '부군수', '해양수산인재개발원장', '수급자격심의위원회', '신청지방자치단체', '스마트도시기반시설의 관리청', '예치기관', '진단자문위원회', '전국적 협의체', '시ㆍ군ㆍ구특수교육운영위원회', '수렵장설정자', '공공하수도를 설치하고자 하는 자', '시ㆍ도심리지원단', '보건지소', '지방자치인재개발원 원장', '기금관리조합', '시ㆍ군ㆍ구 안전관리위원회', '시·군위원회', '긴급구조관련기관', '공공하수도를 설치하려는 자', '시ㆍ도선거관리위원회', '부단체장', '공공처리시설설치자', '지방직영기업의 관리자', '학교도서관발전위원회', '승진후보자 명부 작성단위 기관', '시ㆍ도응급의료위원회', '기초정신건강심의위원회', '학교안전공제회', '도시공원위원회', '시ㆍ도인사위원회'}
+개수: 95
+==================
+공동사무에만 존재
+주체: {'상수도사업소', '감사활동을 수행하는 사람', '공항개발사업시행자', '공원사무소', '국유재산 관리청', '기금수탁자', '안산시', '국공립 연구소', '비관리청', '교육책임자', '청원기관의 장', '경계변경협의체', '한국문화예술위원회 위원장', '승진대상자명부 작성기관', '평생교육시설의 설립자ㆍ경영자', '중앙재난안전대책본부의 본부장', '징계의결 요구권자', '전산관리지정기관', '교육관련기관의 장', '한국철도시설공단', '행정협의조정위원회', '댐수탁관리자', '민방위 경보 통제소', '사립학교를 설치ㆍ경영하는 자', '협의체ㆍ연합체의 대표자', '공직유관단체', '한국수자원공사 사장', '아동학대 신고의무자가 소속된 기관ㆍ시설 등', '영재교육기관', '씨름단체', '방제조치기관', '경영책임자', '인가관청', '공항시설관리자', '울산광역시'}
+개수: 35
+==================</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># '국가'사무에만 존재하는 수행주체</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'수행주체_국가'</span>] <span class="op">=</span> df_1[<span class="st">'조문'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">sum</span>(word <span class="kw">in</span> x <span class="cf">for</span> word <span class="kw">in</span> unique_country))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># '지방' 사무에만 존재하는 수행주체</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'수행주체_지방'</span>] <span class="op">=</span> df_1[<span class="st">'조문'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">sum</span>(word <span class="kw">in</span> x <span class="cf">for</span> word <span class="kw">in</span> unique_province))</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># '공동' 사무에만 존재하는 수행주체</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'수행주체_공동'</span>] <span class="op">=</span> df_1[<span class="st">'조문'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">sum</span>(word <span class="kw">in</span> x <span class="cf">for</span> word <span class="kw">in</span> unique_both))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># '국가' 사무에 들어있는 모든 수행주체</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'수행주체_국가_교'</span>] <span class="op">=</span> df_1[<span class="st">'조문'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">sum</span>(word <span class="kw">in</span> x <span class="cf">for</span> word <span class="kw">in</span> set_country))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># '지방' 사무에 들어있는 모든 수행주체</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'수행주체_지방_교'</span>] <span class="op">=</span> df_1[<span class="st">'조문'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">sum</span>(word <span class="kw">in</span> x <span class="cf">for</span> word <span class="kw">in</span> set_province))</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># '공동' 사무에 들어있는 모든 수행주체</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'수행주체_공동_교'</span>] <span class="op">=</span> df_1[<span class="st">'조문'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">sum</span>(word <span class="kw">in</span> x <span class="cf">for</span> word <span class="kw">in</span> set_both))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="72662091-0cb2-4936-fede-5047153a1616">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df_1[[<span class="st">'수행주체_국가_교'</span>, <span class="st">'수행주체_지방_교'</span>, <span class="st">'수행주체_공동_교'</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<pre><code>수행주체_국가_교    230786
+수행주체_지방_교    224007
+수행주체_공동_교    224662
+dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="rd-column-생성" class="level3">
+<h3 class="anchored" data-anchor-id="rd-column-생성">3rd column 생성</h3>
+<ul>
+<li>‘수행주체_국가n’: 행별로 ’new_수행주체’가 ’국가사무’에서 언급된 횟수 sum</li>
+<li>‘수행주체_지방n’: 행별로 ’new_수행주체’가 ’지방사무’에서 언급된 횟수 sum</li>
+<li>‘수행주체_공동n’: 행별로 ’new_수행주체’가 ’공동사무’에서 언급된 횟수 sum</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subject_dic 만들기</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>subject_dic <span class="op">=</span> {}</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> subject <span class="kw">in</span> subject_list:</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    count_country <span class="op">=</span> df_country[<span class="st">'조문'</span>].<span class="bu">str</span>.contains(subject).<span class="bu">sum</span>()</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    count_province <span class="op">=</span> df_province[<span class="st">'조문'</span>].<span class="bu">str</span>.contains(subject).<span class="bu">sum</span>()</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    count_both <span class="op">=</span> df_both[<span class="st">'조문'</span>].<span class="bu">str</span>.contains(subject).<span class="bu">sum</span>()</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    subject_dic[subject] <span class="op">=</span> [count_country, count_province, count_both]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'수행주체_국가n'</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'수행주체_지방n'</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'수행주체_공동n'</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> tqdm(<span class="bu">range</span>(df.shape[<span class="dv">0</span>]), desc<span class="op">=</span><span class="st">"Processing rows"</span>):</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> df.iloc[i, <span class="dv">5</span>]</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> subject <span class="kw">in</span> subject_list:</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> subject <span class="kw">in</span> text:</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>            df.at[i, <span class="st">'수행주체_국가n'</span>] <span class="op">+=</span> subject_dic[subject][<span class="dv">0</span>]</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>            df.at[i, <span class="st">'수행주체_지방n'</span>] <span class="op">+=</span> subject_dic[subject][<span class="dv">1</span>]</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>            df.at[i, <span class="st">'수행주체_공동n'</span>] <span class="op">+=</span> subject_dic[subject][<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="th-column-생성-법령명" class="level3">
+<h3 class="anchored" data-anchor-id="th-column-생성-법령명">4th column 생성: 법령명</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.max_colwidth'</span>,<span class="va">None</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.max_rows'</span>,<span class="va">None</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># '시행규칙', '시행령' 제거</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'법령명'</span>] <span class="op">=</span> df_1[<span class="st">'법령명'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: re.sub(<span class="vs">r'\s?시행령|\s?시행규칙'</span>, <span class="st">''</span>, x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="0c764f6d-64fc-4f59-878c-1ed4f0a41f38">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">'법령명'</span>].nunique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>1950</code></pre>
+</div>
+</div>
+</section>
+<section id="th-column-생성-법령구분" class="level3">
+<h3 class="anchored" data-anchor-id="th-column-생성-법령구분">5th column 생성: 법령구분</h3>
+<div class="cell" data-outputid="23969b10-2941-47d6-96c9-c040d55b61db">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>pd.crosstab(df_1[<span class="st">'법령구분'</span>], df_1[<span class="st">'사무유형(대분류)'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+
+  <div id="df-0579fc65-2516-4015-8c24-fb91c2cb47dd" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">사무유형(대분류)</th>
+<th data-quarto-table-cell-role="th">공동</th>
+<th data-quarto-table-cell-role="th">국가</th>
+<th data-quarto-table-cell-role="th">지방</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">법령구분</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>5939</td>
+<td>29751</td>
+<td>7567</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>577</td>
+<td>6293</td>
+<td>1295</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>158</td>
+<td>2443</td>
+<td>523</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-0579fc65-2516-4015-8c24-fb91c2cb47dd')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-0579fc65-2516-4015-8c24-fb91c2cb47dd button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-0579fc65-2516-4015-8c24-fb91c2cb47dd');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-31361557-72ce-4af3-91d8-e4f16673c2fb">
+  <button class="colab-df-quickchart" onclick="quickchart('df-31361557-72ce-4af3-91d8-e4f16673c2fb')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-31361557-72ce-4af3-91d8-e4f16673c2fb button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+    </div>
+  </div>
+</div>
+</div>
+</section>
+</section>
+<section id="모델링" class="level2">
+<h2 class="anchored" data-anchor-id="모델링">2. 모델링</h2>
+<section id="train-test-split" class="level3">
+<h3 class="anchored" data-anchor-id="train-test-split">0) train-test split</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedShuffleSplit</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, precision_score, recall_score, f1_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_1[[<span class="st">'법령명'</span>, <span class="st">'법령구분'</span>, <span class="st">'수행주체_freq1'</span>, <span class="st">'수행주체_freq2'</span>, <span class="st">'수행주체_freq3'</span>, <span class="st">'수행주체_국가'</span>, <span class="st">'수행주체_지방'</span>, <span class="st">'수행주체_공동'</span>, <span class="st">'수행주체_국가_교'</span>, <span class="st">'수행주체_지방_교'</span>, <span class="st">'수행주체_공동_교'</span>]]</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_1[<span class="st">'사무유형(대분류)'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>stratified_splitter <span class="op">=</span> StratifiedShuffleSplit(n_splits<span class="op">=</span><span class="dv">1</span>, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> train_index, val_index <span class="kw">in</span> stratified_splitter.split(X, y):</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    X_train <span class="op">=</span> X.iloc[train_index]</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    y_train <span class="op">=</span> y.iloc[train_index]</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    X_test <span class="op">=</span> X.iloc[val_index]</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    y_test <span class="op">=</span> y.iloc[val_index]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="28338b30-2809-4394-d32e-cf996056987c">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># '법령명' label encoding 진행</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>encoder <span class="op">=</span> LabelEncoder()</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>X_train[<span class="st">'법령명'</span>] <span class="op">=</span> encoder.fit_transform(X_train[<span class="st">'법령명'</span>]) <span class="co"># train set에는 fit_transform</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label <span class="kw">in</span> X_test[<span class="st">'법령명'</span>]:</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> label <span class="kw">not</span> <span class="kw">in</span> encoder.classes_:</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>        encoder.classes_ <span class="op">=</span> np.append(encoder.classes_,label)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>X_test[<span class="st">'법령명'</span>] <span class="op">=</span> encoder.transform(X_test[<span class="st">'법령명'</span>]) <span class="co"># test set에는 transform</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  X_train['법령명'] = encoder.fit_transform(X_train['법령명']) # train set에는 fit_transform
+&lt;ipython-input-42-5ddf05ec193a&gt;:9: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  X_test['법령명'] = encoder.transform(X_test['법령명']) # test set에는 transform</code></pre>
+</div>
+</div>
+</section>
+<section id="random-forest" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest">1) random forest</h3>
+<div class="cell" data-outputid="a517391c-ef62-4428-dce0-faddb0283967">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RandomForest Classifier</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>y_pred_proba <span class="op">=</span> model.predict_proba(X_test)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y_pred_proba)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred))</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>conf_matrix <span class="op">=</span> confusion_matrix(y_test, y_pred)</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>sns.heatmap(conf_matrix, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>)</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predicted Label'</span>)</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'True Label'</span>)</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Confusion Matrix'</span>)</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[0.         1.         0.        ]
+ [0.13933333 0.86066667 0.        ]
+ [0.         1.         0.        ]
+ ...
+ [0.44478175 0.41347672 0.14174154]
+ [0.36       0.64       0.        ]
+ [0.         0.74428571 0.25571429]]
+              precision    recall  f1-score   support
+
+          공동       0.53      0.48      0.50      1335
+          국가       0.88      0.89      0.89      7698
+          지방       0.65      0.64      0.65      1877
+
+    accuracy                           0.80     10910
+   macro avg       0.68      0.67      0.68     10910
+weighted avg       0.80      0.80      0.80     10910
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="수민_사무유형구분_머신러닝_files/figure-html/cell-32-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="b77d7f89-54e1-42c6-86dc-8a00a3715686">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>importance <span class="op">=</span> model.feature_importances_</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>ser <span class="op">=</span> pd.Series(importance, index <span class="op">=</span> X.columns)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 가장 중요한 feature 순으로 정렬</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>importance_sort <span class="op">=</span> ser.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Feature Importances'</span>)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>importance_sort, y<span class="op">=</span>importance_sort.index)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="수민_사무유형구분_머신러닝_files/figure-html/cell-33-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
